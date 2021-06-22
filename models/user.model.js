@@ -11,7 +11,7 @@ const bookSchema = require('./book.model');
 
 //create a schema
 const userSchema = new mongoose.Schema({
-    email: {type: String},
+    email: String,
     books: [bookSchema]
 });
 
@@ -22,7 +22,7 @@ const userModel = mongoose.model('user', userSchema);
 const seedUserData = () => {
     const newUser = new userModel({
         email:'ahmadshalein@gmail.com',
-        book: [
+        books: [
             {
               name: 'Anna Karenina (1887)',
               description: 'The greatest novel ever written according to top authors and laymen alike, Anna Karenina is the 1877 masterpiece which paints a glaringly vivid picture of contemporary Russian society. Tolstoy’s first self-proclaimed novel, Anna Karenina, tells the story of the eponymous Russian society woman who, initially trapped by societal conventions, dares to leave her loveless marriage for an illicit love and meets with tragic consequences. Another titan of Russian literature, Fyodor Dostoyevsky, described Anna Karenina as a “flawless work of art”, so if you’re only going to read one Tolstoy novel, this should probably be the one.',
@@ -43,7 +43,7 @@ const seedUserData = () => {
     )
     const userTwo = new userModel({
         email:'demashqeh@gmail.com',
-        book: [
+        books: [
             {
               name: 'Anna Karenina (1887)',
               description: 'The greatest novel ever written according to top authors and laymen alike, Anna Karenina is the 1877 masterpiece which paints a glaringly vivid picture of contemporary Russian society. Tolstoy’s first self-proclaimed novel, Anna Karenina, tells the story of the eponymous Russian society woman who, initially trapped by societal conventions, dares to leave her loveless marriage for an illicit love and meets with tragic consequences. Another titan of Russian literature, Fyodor Dostoyevsky, described Anna Karenina as a “flawless work of art”, so if you’re only going to read one Tolstoy novel, this should probably be the one.',
@@ -68,6 +68,6 @@ const seedUserData = () => {
     newUser.save();
     userTwo.save();
 }
-seedUserData();
+// seedUserData();
 module.exports = userModel;
-module.exports = seedUserData();
+// module.exports = seedUserData();
