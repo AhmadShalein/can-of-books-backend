@@ -10,9 +10,9 @@ const mongoose = require('mongoose');
 
 //create a schema
 const bookSchema = new mongoose.Schema({
-    name: {type: String},
-    description: {type: String},
-    status: {type: String}
+    name:String,
+    description:String,
+    status:String
 }); 
 
 module.exports = bookSchema;
