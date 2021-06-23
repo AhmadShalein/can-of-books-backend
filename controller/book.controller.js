@@ -1,19 +1,55 @@
-'use strict';
+'use strict'
 
 const userModel = require('../models/user.model');
 
 function getUserHandler(request,response){
-    let userEmail = request.query.email;
-    userModel.find({email:userEmail},function(error,userData){
+    let email = request.query.email;
+    userModel.findOne({email:email},function(error,userData){
         if(error){
             console.log('something went wrong');
+            // response.send(error)
         }
         else
         {
-            // console.log(userData[0].books);
-            response.send(userData[0].books);
+            // console.log(userData.books);
+            response.send(userData.books);
         }
     })
 }
 
-module.exports = getUserHandler;
+function addBook(request,response){
+    const {email, name, description, status} = request.body;
+    console.log(request.body)
+    userModel.findOne({email:email},function(error,userData){
+        if(error){
+            console.log('something went wrong');
+            response.send(error)
+        }
+        else
+        {
+            // console.log(userData[0].books);
+            userData.books.push({name : name , description : description , status :status})
+            userData.save();
+            response.send(userData.books);
+        }
+    })
+}
+
+function deleteBook(request,response){
+    // console.log(request.params)
+    const bookIndex = request.params.book_idx;
+    const email = request.query.email;
+
+    userModel.findOne({email:email},function(error,userData){
+        if (error) {
+            response.send(error)
+        } else {
+            userData.books.splice(bookIndex, 1);
+            userData.save();
+            response.send(userData.books)
+        }
+
+    });
+}
+
+module.exports = {getUserHandler,addBook,deleteBook};

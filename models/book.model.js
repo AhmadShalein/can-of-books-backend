@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const mongoose = require('mongoose');
 
@@ -10,9 +10,9 @@ const mongoose = require('mongoose');
 
 //create a schema
 const bookSchema = new mongoose.Schema({
-    name:String,
-    description:String,
-    status:String
+    name: {type: String},
+    description: {type: String},
+    status: {type: String}
 }); 
 
 module.exports = bookSchema;
