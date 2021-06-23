@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const mongoose = require('mongoose');
 const bookSchema = require('./book.model');
@@ -11,7 +11,7 @@ const bookSchema = require('./book.model');
 
 //create a schema
 const userSchema = new mongoose.Schema({
-    email: String,
+    email: {type: String},
     books: [bookSchema]
 });
 
@@ -20,7 +20,7 @@ const userModel = mongoose.model('user', userSchema);
 
 //data seeding (store data)
 const seedUserData = () => {
-    const newUser = new userModel({
+    const userOne = new userModel({
         email:'ahmadshalein@gmail.com',
         books: [
             {
@@ -62,10 +62,10 @@ const seedUserData = () => {
         ]
     })
 
-    console.log(newUser);
+    console.log(userOne);
     console.log(userTwo);
 
-    newUser.save();
+    userOne.save();
     userTwo.save();
 }
 // seedUserData();
