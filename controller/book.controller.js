@@ -27,7 +27,7 @@ function addBook(request,response){
         }
         else
         {
-            // console.log(userData[0].books);
+            // console.log(userData.books);
             userData.books.push({name : name , description : description , status :status})
             userData.save();
             response.send(userData.books);
@@ -49,7 +49,24 @@ function deleteBook(request,response){
             response.send(userData.books)
         }
 
-    });
+    })
 }
 
-module.exports = {getUserHandler,addBook,deleteBook};
+function updateBook(request,response){
+    const bookIndex = request.params.book_idx;
+    const {email, name, description, status} = request.body;
+    userModel.findOne({email:email},function(error,userData){
+        if(error){
+            console.log('something went wrong');
+            response.send(error)
+        }
+        else
+        {
+            userData.books.splice(bookIndex, 1, {name, description, status});
+            userData.save();
+            response.send(userData.books)
+        }
+    })
+}
+
+module.exports = {getUserHandler,addBook,deleteBook, updateBook};

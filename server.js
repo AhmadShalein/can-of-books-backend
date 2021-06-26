@@ -5,7 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bookSchema = require('./models/book.model');
-const {getUserHandler, addBook, deleteBook} = require('./controller/book.controller');
+const {getUserHandler, addBook, deleteBook, updateBook} = require('./controller/book.controller');
 
 const app = express();
 app.use(cors());
@@ -23,6 +23,7 @@ app.get('/',homeHandler);
 app.get('/books', getUserHandler);
 app.post('/books', addBook);
 app.delete('/books/:book_idx', deleteBook);
+app.put('/books/:book_idx', updateBook);
 
 function homeHandler(request,response){
     response.send('Home route!');
