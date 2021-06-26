@@ -14,7 +14,7 @@ app.use(express.json())
 const PORT = process.env.PORT || 3030;
 
 //connect the express server with mongodb
-mongoose.connect('mongodb://localhost:27017/books', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(`${process.env.MONGO_URL}`, {useNewUrlParser: true, useUnifiedTopology: true});
 
 //create a model
 const bookModel = mongoose.model('Book', bookSchema);
